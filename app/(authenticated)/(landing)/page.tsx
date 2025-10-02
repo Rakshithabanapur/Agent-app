@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import AgentForm from "./components/agentForm";
 import { toast } from "sonner";
 import AgentTable from "./components/agentTable";
@@ -11,7 +11,14 @@ import { useAuth } from "@/context/AuthContext";
 
 const Page = () => {
   const [showForm, setShowForm] = useState(false);
+  const [isClient, setIsClient] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const { token } = useAuth();
+
+  // Set client-side flag after hydration
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   const handleAgentSubmit = async (agent: any) => {
     const res = await fetch("/api/agents", {
@@ -77,6 +84,15 @@ const Page = () => {
       toast.error("File upload failed. Please try again.");
       console.error(error);
     }
+
+    // Reset the file input
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
+  };
+
+  const handleUploadClick = () => {
+    fileInputRef.current?.click();
   };
 
   return (
@@ -87,20 +103,24 @@ const Page = () => {
         </h2>
       </div>
 
-
       <div className="space-x-2">
         <div className="flex justify-end space-x-2 mb-6">
-          <label>
+          {/* File input - only render on client side */}
+          {isClient && (
             <input
+              ref={fileInputRef}
               type="file"
               accept=".csv, .xlsx, .xls"
               className="hidden"
               onChange={handleUploadFile}
             />
-            <Button asChild className="px-4 py-2 bg-blue-600 text-white rounded">
-              <span>Upload File</span>
-            </Button>
-          </label>
+          )}
+          <Button
+            onClick={handleUploadClick}
+            className="px-4 py-2 bg-blue-600 text-white rounded"
+          >
+            Upload File
+          </Button>
 
           <Button
             onClick={() => setShowForm(true)}
@@ -114,15 +134,17 @@ const Page = () => {
       {showForm && (
         <AgentForm
           onSubmit={handleAgentSubmit}
-          onClose={() => setShowForm(false)} open={false} />
+          onClose={() => setShowForm(false)}
+          open={false}
+        />
       )}
       <AgentTable />
       <AgentForm
         onSubmit={handleAgentSubmit}
         onClose={() => setShowForm(false)}
-        open={showForm} />
+        open={showForm}
+      />
     </div>
-
   );
 };
 
