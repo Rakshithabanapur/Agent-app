@@ -81,9 +81,15 @@ const Page = () => {
 
   return (
     <div className="p-6">
-      <div className="flex justify-between items-center p-2">
-        <h2 className="text-2xl font-semibold ">Agents List</h2>
-        <div className="space-x-2">
+      <div className="flex justify-center items-center mb-4 space-x-2">
+        <h2 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-green-500 bg-clip-text text-transparent">
+          Agents List
+        </h2>
+      </div>
+
+
+      <div className="space-x-2">
+        <div className="flex justify-end space-x-2 mb-6">
           <label>
             <input
               type="file"
@@ -91,14 +97,14 @@ const Page = () => {
               className="hidden"
               onChange={handleUploadFile}
             />
-            <Button asChild className="px-4 py-2 bg-green-600 text-white rounded">
+            <Button asChild className="px-4 py-2 bg-blue-600 text-white rounded">
               <span>Upload File</span>
             </Button>
           </label>
 
           <Button
             onClick={() => setShowForm(true)}
-            className="px-4 py-2 bg-green-600 text-white rounded"
+            className="px-4 py-2 bg-blue-600 text-white rounded"
           >
             Add Agent
           </Button>

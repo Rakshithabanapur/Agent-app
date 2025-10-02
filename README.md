@@ -1,15 +1,15 @@
 # Agent-App
 
-A modern web application built with Next.js that [briefly describe what your project does].
-
-<!-- ![Project Screenshot](https://via.placeholder.com/800x400?text=Project+Screenshot) -->
+A modern web application built with Next.js that allows user authentication, agent management, and CSV list distribution among registered agents.
 
 ## 🚀 Features
 
-- Feature 1 description
-- Feature 2 description  
-- Feature 3 description
+- Secure Admin Authentication System
+- Agent Management Dashboard
+- File Upload & Distribution System
 - Responsive design
+- Real-time Notifications
+- Data Validation
 - Fast performance
 - SEO optimized
 
@@ -19,13 +19,25 @@ Before you begin, ensure you have the following installed:
 - *Node.js* (version 14.6.0 or higher)
 - *npm* (version 6.0.0 or higher) or *yarn* (version 1.22.0 or higher)
 - *Git*
+- *MongoDB* (Atlas cloud or local)
 
 ## 🛠 Installation & Setup
 
 Follow these steps to get the project running on your local machine:
 
-### Option 1: Clone the Repository
-```bash
-git clone https://github.com/Sushmitharpatil2003/Agent-app.git
+## 1. Clone the Repository
 
-cd agent-app
+git clone https://github.com/Rakshithabanapur/Agent-app.git
+cd Agent-app
+run 'npm install'
+run 'npm run dev'
+
+## 📋 Prerequisites
+
+Before you begin, ensure you have the following installed:
+
+- *Node.js* (version 14.6.0 or higher)
+- *npm* (version 6.0.0 or higher)
+- *Git*
+
+
