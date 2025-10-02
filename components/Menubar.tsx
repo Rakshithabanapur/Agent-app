@@ -18,7 +18,6 @@ export const MainMenubar = () => {
         </div>
       </div>
 
-
       <Button
         onClick={logout}
         className="bg-white text-[#2563eb] hover:bg-black hover:text-white font-medium px-6 py-2 rounded-lg shadow transition-colors"

@@ -15,7 +15,6 @@ const Page = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { token } = useAuth();
 
-  // Set client-side flag after hydration
   useEffect(() => {
     setIsClient(true);
   }, []);
@@ -85,7 +84,6 @@ const Page = () => {
       console.error(error);
     }
 
-    // Reset the file input
     if (fileInputRef.current) {
       fileInputRef.current.value = "";
     }
@@ -105,7 +103,6 @@ const Page = () => {
 
       <div className="space-x-2">
         <div className="flex justify-end space-x-2 mb-6">
-          {/* File input - only render on client side */}
           {isClient && (
             <input
               ref={fileInputRef}
