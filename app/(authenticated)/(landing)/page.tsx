@@ -91,7 +91,7 @@ const Page = () => {
               className="hidden"
               onChange={handleUploadFile}
             />
-            <Button asChild className="px-4 py-2 text-white rounded">
+            <Button asChild className="px-4 py-2 bg-green-600 text-white rounded">
               <span>Upload File</span>
             </Button>
           </label>
@@ -108,11 +108,15 @@ const Page = () => {
       {showForm && (
         <AgentForm
           onSubmit={handleAgentSubmit}
-          onClose={() => setShowForm(false)}
-        />
+          onClose={() => setShowForm(false)} open={false} />
       )}
       <AgentTable />
+      <AgentForm
+        onSubmit={handleAgentSubmit}
+        onClose={() => setShowForm(false)}
+        open={showForm} />
     </div>
+
   );
 };
 

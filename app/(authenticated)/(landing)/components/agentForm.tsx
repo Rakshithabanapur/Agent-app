@@ -4,8 +4,15 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
-
 import React, { useState } from "react";
+
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogFooter,
+} from "@/components/ui/dialog";
 
 interface Agent {
   name: string;
@@ -17,9 +24,10 @@ interface Agent {
 interface AgentFormProps {
   onSubmit: (agent: Agent) => void;
   onClose: () => void;
+  open: boolean;
 }
 
-const AgentForm: React.FC<AgentFormProps> = ({ onSubmit, onClose }) => {
+const AgentForm: React.FC<AgentFormProps> = ({ onSubmit, onClose, open }) => {
   const [formData, setFormData] = useState<Agent>({
     name: "",
     email: "",
@@ -37,23 +45,25 @@ const AgentForm: React.FC<AgentFormProps> = ({ onSubmit, onClose }) => {
     onSubmit(formData);
     onClose();
   };
+
   const handlePhoneChange = (value: string) => {
     setFormData({ ...formData, mobile: "+" + value });
   };
 
   return (
-    <div className="fixed inset-0 bg-black/30 backdrop-blur-sm flex items-center justify-center">
-      <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-md">
-        <h2 className="text-xl font-semibold mb-4 text-center">Add Agent</h2>
-        
-        <form onSubmit={handleSubmit} className="space-y-4">
+    <Dialog open={open} onOpenChange={onClose}>
+      <DialogContent className="sm:max-w-md">
+        <DialogHeader>
+          <DialogTitle>Add Agent</DialogTitle>
+        </DialogHeader>
+
+        <form onSubmit={handleSubmit} className="space-y-4 mt-2">
           <Input
             type="text"
             name="name"
             placeholder="Name"
             value={formData.name}
             onChange={handleChange}
-            className="w-full border px-3 py-2 rounded"
             required
           />
 
@@ -63,17 +73,16 @@ const AgentForm: React.FC<AgentFormProps> = ({ onSubmit, onClose }) => {
             placeholder="Email"
             value={formData.email}
             onChange={handleChange}
-            className="w-full border px-3 py-2 rounded"
             required
           />
 
           <PhoneInput
-            country={"in"} // default to India
+            country={"in"} // default India
             value={formData.mobile}
             onChange={handlePhoneChange}
             inputClass="!w-full !border !rounded !py-2"
             containerClass="w-full"
-            enableSearch={true} // allows searching countries
+            enableSearch={true}
           />
 
           <Input
@@ -82,28 +91,22 @@ const AgentForm: React.FC<AgentFormProps> = ({ onSubmit, onClose }) => {
             placeholder="Password"
             value={formData.password}
             onChange={handleChange}
-            className="w-full border px-3 py-2 rounded"
             required
           />
 
-          <div className="flex justify-end space-x-2">
+          <DialogFooter>
             <Button
               type="button"
+              variant="outline"
               onClick={onClose}
-              className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"
             >
               Cancel
             </Button>
-            <Button
-              type="submit"
-              className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-            >
-              Submit
-            </Button>
-          </div>
+            <Button type="submit">Submit</Button>
+          </DialogFooter>
         </form>
-      </div>
-    </div>
+      </DialogContent>
+    </Dialog>
   );
 };
 
