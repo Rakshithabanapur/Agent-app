@@ -32,12 +32,5 @@ cd Agent-app
 run 'npm install'
 run 'npm run dev'
 
-## 📋 Prerequisites
-
-Before you begin, ensure you have the following installed:
-
-- *Node.js* (version 14.6.0 or higher)
-- *npm* (version 6.0.0 or higher)
-- *Git*
 
 
